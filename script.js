@@ -1,6 +1,6 @@
 $(document).ready(function(){
   function createBubble() {
-    var size = Math.floor(Math.random() * 25) + 7;
+    var size = Math.floor(Math.random() * 35) + 7;
     var duration = Math.floor(Math.random() * 75) + 300;
     var x = Math.floor(Math.random() * 100);
     var y = Math.floor(Math.random() * 100);
@@ -9,17 +9,40 @@ $(document).ready(function(){
                                                        "left": "-=" + size / 2,
                                                        "width": size + "px",
                                                        "height": size + "px"
-                                                     }, duration, "easeInOutQuad", function(){
+                                                     }, duration, "linear", function(){
       // $(this).animate({ "width": size, "height": size }, duration * 2, "easeInOutQuad", function() {
-        $(this).css('border-width', '0');
+        $(this).remove();
       // });
+    });
+  }
+
+  function createStar() {
+    var size = Math.floor(Math.random() * 25) + 7;
+    var duration = Math.floor(Math.random() * 75) + 200;
+    var x = Math.floor(Math.random() * 100);
+    var y = Math.floor(Math.random() * 100);
+    var $new_star = "<div class='star' style='left:" + x + "%; top:" + y + "%'><div class='star-stripe horizontal'></div>" +
+                                                                              "<div class='star-stripe vertical'></div>" +
+                                                                              "<div class='star-stripe horizontal mirror'></div>" +
+                                                                              "<div class='star-stripe vertical mirror'></div></div>";
+
+    $($new_star).appendTo('#bubble-field').children(".horizontal").animate({ "width": size + "px" }, duration, "linear", function() {
+      $(this).animate({ "width": 0, "padding-left": "+=" + size }, duration, "linear");
+    }).parent().children(".vertical").animate({ "height": size + "px" }, duration, "linear", function() {
+      $(this).animate({ "height": 0, "padding-top": "+=" + size }, duration, "linear");
     });
   }
 
   function createBubbleField() {
     $('#bubble-field').animate({ "top": "30px" }, 1200, "linear");
-    for(var i = 0; i < 35; i += 1) {
+    for(var i = 0; i < 23; i += 1) {
       setTimeout(createBubble, i * 30);
+    }
+  }
+
+  function createStarField() {
+    for(var i = 0; i < 18; i += 1) {
+      setTimeout(createStar, i * 30);
     }
   }
 
@@ -46,9 +69,9 @@ $(document).ready(function(){
              .animate({
                 "left": ($(window).width() - 500) / 2,
                 "width": "500px"
-              }, 500, "easeInOutQuad");
+              }, 700, "easeInOutQuad");
 
-    setTimeout(three, 700);
+    setTimeout(three, 500);
   }
 
   function three() {
@@ -58,6 +81,15 @@ $(document).ready(function(){
       "top": ($(window).height() + 100) / 2,
       "height": "1px"
     }, 800, "easeInOutQuad");
+
+    createBubbleField();
+    createStar();
+    createStar();
+    createStar();
+    createStar();
+    createStar();
+    createStar();
+    createStar();
 
     $('body').append("<h1 id='name'>" +
                       "<span id='h'>H</span>" +
@@ -83,22 +115,21 @@ $(document).ready(function(){
     });
 
     var text_color = "#fff";
-    var duration = 200;
+    var duration = 340;
+    var delay = 180;
     var easing = "easeInOutQuad";
 
     $('#h').animate({ "color": text_color }, duration, easing);
-    setTimeout(function(){ $('#a1').animate({ "color": text_color }, duration, easing); }, duration*0.5);
-    setTimeout(function(){ $('#r1').animate({ "color": text_color }, duration, easing); }, duration*1);
-    setTimeout(function(){ $('#r2').animate({ "color": text_color }, duration, easing); }, duration*1.5);
-    setTimeout(function(){ $('#i').animate({ "color": text_color }, duration, easing); }, duration*2);
-    setTimeout(function(){ $('#e').animate({ "color": text_color }, duration, easing); }, duration*2.5);
-    setTimeout(function(){ $('#t').animate({ "color": text_color }, duration, easing); }, duration*3);
-    setTimeout(function(){ $('#w').animate({ "color": text_color }, duration, easing); }, duration*4);
-    setTimeout(function(){ $('#a2').animate({ "color": text_color }, duration, easing); }, duration*4.5);
-    setTimeout(function(){ $('#m').animate({ "color": text_color }, duration, easing); }, duration*5);
-    setTimeout(function(){ $('#s').animate({ "color": text_color }, duration, easing); }, duration*5.5);
-
-    createBubbleField();
+    setTimeout(function(){ $('#a1').animate({ "color": text_color }, duration, easing); }, delay*0.5);
+    setTimeout(function(){ $('#r1').animate({ "color": text_color }, duration, easing); }, delay*1);
+    setTimeout(function(){ $('#r2').animate({ "color": text_color }, duration, easing); }, delay*1.5);
+    setTimeout(function(){ $('#i').animate({ "color": text_color }, duration, easing); }, delay*2);
+    setTimeout(function(){ $('#e').animate({ "color": text_color }, duration, easing); }, delay*2.5);
+    setTimeout(function(){ $('#t').animate({ "color": text_color }, duration, easing); }, delay*3);
+    setTimeout(function(){ $('#w').animate({ "color": text_color }, duration, easing); }, delay*4);
+    setTimeout(function(){ $('#a2').animate({ "color": text_color }, duration, easing); }, delay*4.5);
+    setTimeout(function(){ $('#m').animate({ "color": text_color }, duration, easing); }, delay*5);
+    setTimeout(function(){ $('#s').animate({ "color": text_color }, duration, easing); }, delay*5.5);
   }
 
   one();

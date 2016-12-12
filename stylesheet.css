@@ -80,3 +80,48 @@ html, body {
   background-color: transparent;
   border: 1px solid #fff;
 }
+
+.star {
+  position: absolute;
+}
+
+.star-stripe {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-clip: content-box;
+}
+
+.star-stripe.horizontal {
+  height: 1px;
+  padding-left: 7px;
+  -webkit-transform-origin: left center;
+  -ms-transform-origin: left center;
+  transform-origin: left center;
+}
+
+.star-stripe.vertical {
+  width: 1px;
+  padding-top: 7px;
+  -webkit-transform-origin: center top;
+  -ms-transform-origin: center top;
+  transform-origin: center top;
+}
+
+.star-stripe.mirror {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+
+
+
+
+
+
+
+
+
+
